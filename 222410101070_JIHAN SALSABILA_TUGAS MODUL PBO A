@@ -1,0 +1,219 @@
+using System;
+
+namespace modul 
+{
+    // INSTRUKSI NOMER 2 (PEMBUATAN CLASS SESUAI CLASS DIAGRAM SOAL)
+    class Processor
+    {
+        public string merk, tipe;
+
+        public Processor(string merk, string tipe)
+        {
+            this.merk = merk;
+            this.tipe = tipe;
+        }
+        public override string ToString()
+        {
+            return $"{merk} {tipe}";
+        }
+
+        internal class Intel : Processor
+        {
+            public Intel(string tipe) : base("Intel", tipe) { }
+        }
+
+            internal class Corei3 : Intel
+            {
+                public Corei3() : base("Core i3") { }
+            }
+
+            internal class Corei5 : Intel
+            {
+                public Corei5() : base("Core i5") { }
+            }
+
+            internal class Corei7 : Intel
+            {
+                public Corei7() : base("Core i7") { }
+            }
+
+        internal class AMD : Processor
+        {
+            public AMD(string tipe) : base("AMD", tipe) { }
+        }
+
+            internal class Ryzen : AMD
+            {
+                public Ryzen() : base("RYZEN") { }
+            }
+
+            internal class Athlon : AMD
+            {
+                public Athlon() : base("ATHLON") { }
+            }
+        }
+
+
+    class Vga
+    {
+        public string merk;
+
+        public Vga(string merk)
+        {
+            this.merk = merk;
+        }
+        public override string ToString()
+        {
+            return merk;
+        }
+
+        internal class Nvidia : Vga
+        {
+            public Nvidia() : base("Nvidia") { }
+        }
+
+        internal class AMD : Vga
+        {
+            public AMD() : base("AMD") { }
+        }
+    }
+
+    class Laptop
+    {
+        public string merk, tipe;
+        public Vga Vga;
+        public Processor Processor;
+
+        public Laptop(string merk, string tipe, Vga vga, Processor processor)
+        {
+            this.merk = merk;
+            this.tipe = tipe;
+            Vga = vga;
+            Processor = processor;
+        }
+
+        // INSTRUKSI NOMER 2 (A) PEMBUATAN METHOD LAPTOP DINYALAKAN
+        public void LaptopDinyalakan()
+        {
+            Console.WriteLine($"Laptop {merk} {tipe} menyala");
+        }
+
+        // INSTRUKSI NOMER 2 (B) PEMBUATAN METHOD LAPTOP DIMATIKAN
+        public void LaptopDimatikan()
+        {
+            Console.WriteLine($"Laptop {merk} {tipe} mati");
+        }
+
+        // PENYELESAIAN SOAL MODUL NOMER 3
+        public void SpesifikasiLaptop()
+        {
+            Console.WriteLine($"Spesifikasi laptop \n Merk VGA: {Vga} \n Merk Processor: {Processor.merk} \n Tipe Processor: {Processor.tipe}");
+        }
+    }
+
+    class ASUS : Laptop
+    {
+        public ASUS(string tipe, Vga vga, Processor processor) : base("ASUS", tipe, vga, processor) { }
+    }
+
+        class ROG : ASUS
+        {
+            public ROG(Vga vga, Processor processor) : base("ROG", vga, processor) { }
+        }
+
+        class Vivobook : ASUS
+        {
+            public Vivobook(Vga vga, Processor processor) : base("Vivobook", vga, processor) { }
+            public void Ngoding()
+            {
+                Console.WriteLine("Ctak Ctak Ctak, error lagi!!");
+            }
+        }
+
+    class ACER : Laptop
+    {
+        public ACER(string tipe, Vga vga, Processor processor) : base("ACER", tipe, vga, processor) { }
+    }
+
+        class Swift : ACER
+        {
+            public Swift(Vga vga, Processor processor) : base("Swift", vga, processor) { }
+        }
+
+        class Predator : ACER
+        {
+            public Predator(Vga vga, Processor processor) : base("Predator", vga, processor) { }
+            public void BermainGame()
+            {
+                Console.WriteLine($"Laptop {merk} {tipe} sedang memainkan game");
+            }
+        }
+
+    class LENOVO : Laptop
+    {
+        public LENOVO(string merk, string tipe, Vga vga, Processor processor) : base("LENOVO", tipe, vga, processor) { }
+    }
+
+        class Ideapad : ASUS
+        {
+            public Ideapad(Vga vga, Processor processor) : base("Ideapad", vga, processor) { }
+        }
+
+        class Legion : ASUS
+        {
+            public Legion(Vga vga, Processor processor) : base("Legion", vga, processor) { }
+            public void BermainGame()
+            {
+                Console.WriteLine($"Laptop {merk} {tipe} sedang memainkan game");
+            }
+        }
+
+    // INSTRUKSI NOMER 3 (PEMBUATAN VARIABEL PADA METHOD MAIN)
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Laptop laptop1, laptop2;   // INSTRUKSI 3A
+            Predator predator;    // INSTRUKSI 3B
+
+            laptop1 = new Vivobook(new Vga.Nvidia(), new Processor.Corei5());    // INSTRUKSI NOMER 4
+            laptop2 = new Ideapad(new Vga.AMD(), new Processor.Ryzen());         // INSTRUKSI NOMER 5
+            predator = new Predator(new Vga.AMD(), new Processor.Corei7());      // INSTRUKSI NOMER 6
+
+
+
+
+            // JAWABAN SOAL PADA MODUL
+
+            // SOAL NOMER 1 (Jalankan method LaptopDinyalakan() dan LaptopDimatikan() pada laptop2. Apa yang terjadi? Mengapa begitu?)
+            // PENYELESAIAN:
+            laptop2.LaptopDinyalakan();
+            laptop2.LaptopDimatikan();
+
+            // SOAL NOMER 2 (Jalankan method Ngoding() pada laptop1. Apa yang terjadi? Mengapa begitu?)
+            // PENYELESAIAN:
+            ((Vivobook)laptop1).Ngoding();
+
+            // SOAL NOMER 3 (Dapatkah Anda menampilkan di console spesifikasi (merk vga, merk processor, tipe processor) apa yang digunakan laptop1? Bagaimana caranya?)
+            // PENYELESAIAN:
+            laptop1.SpesifikasiLaptop();
+
+            // SOAL NOMER 4 (Jalankan method BermainGame() pada predator. Apa yang terjadi? Mengapa begitu?)
+            // PENYELESAIAN:
+            predator.BermainGame();
+
+            // SOAL NOMER 5 (Buatlah sebuah variabel acer bertipe data ACER, kemudian masukkan objek Predator sebagai nilainya. Jalankan method BermainGame() pada acer. Apa yang terjadi? Mengapa begitu?)
+            //PENYELESAIAN:
+            ACER acer = new Predator(new Vga.Nvidia(), new Processor.Ryzen());
+            
+            if (acer is Predator acer1)
+            {
+                acer1.BermainGame();
+            }
+
+            // SOAL NOMER 6 (Kesimpulan apa yang dapat Anda ambil?)
+            // PENYELESAIAN TERTERA DALAM MODUL
+
+        }
+    }
+}
